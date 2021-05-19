@@ -1,6 +1,6 @@
 import type { AWS } from '@serverless/typescript';
 
-import hello from '@functions/hello';
+import Auth from '@functions/auth';
 
 const serverlessConfiguration: AWS = {
   service: 'serverless-url-shortener',
@@ -56,7 +56,7 @@ const serverlessConfiguration: AWS = {
     }
   },
   functions: {
-    hello
+    Auth
   },
   resources: {
     Resources: {
