@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@auth/*": ["src/auth/*"],
+      "@businessLogic/*": ["src/businessLogic/*"],
+      "@dataLayer/*": ["src/dataLayer/*"],
+      "@functions/*": ["src/functions/*"],
+      "@libs/*": ["src/libs/*"],
+      "@models/*": ["src/models/*"],
+      "@requests/*": ["src/requests/*"],
+      "@utils/*": ["src/utils/*"],
+    }
+  }
+}
