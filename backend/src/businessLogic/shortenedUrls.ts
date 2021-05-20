@@ -9,7 +9,7 @@ const logger = createLogger('shortenedUrls')
 
 const shortenedUrlAccess = new ShortenedUrlAccess()
 
-const apiId = 'xgc8h3gbw0'
+const apiId = process.env.API_ID
 const apiEndpoint = process.env.IS_OFFLINE ? 'http://localhost:3003/dev' : `https://${apiId}.execute-api.eu-west-2.amazonaws.com/dev`
 
 /**

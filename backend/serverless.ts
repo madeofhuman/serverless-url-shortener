@@ -52,6 +52,7 @@ const serverlessConfiguration: AWS = {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       SHORTENED_URLS_TABLE: '${self:service}-ShortenedUrls-${self:custom.stage}',
       INDEX_NAME: 'createdAt',
+      API_ID: 'xgc8h3gbw0'
     },
     tracing: {
       lambda: true,
