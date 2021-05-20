@@ -5,6 +5,7 @@ import createShortenedUrl from '@functions/http/createShortenedUrl';
 import getShortenedUrls from '@functions/http/getShortenedUrls';
 import deleteShortenedUrl from '@functions/http/deleteShortenedUrl';
 import getShortenedUrl from '@functions/http/getShortenedUrl';
+import getLongUrl from '@functions/http/getLongUrl';
 
 const serverlessConfiguration: AWS = {
   service: 'serverless-url-shortener',
@@ -54,7 +55,7 @@ const serverlessConfiguration: AWS = {
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       SHORTENED_URLS_TABLE: '${self:service}-ShortenedUrls-${self:custom.stage}',
-      INDEX_NAME: 'createdAt',
+      SHORTENED_URLS_TABLE_INDEX_NAME: 'longUrlIndex',
       API_ID: 'xgc8h3gbw0'
     },
     tracing: {
@@ -68,6 +69,7 @@ const serverlessConfiguration: AWS = {
     getShortenedUrls,
     deleteShortenedUrl,
     getShortenedUrl,
+    getLongUrl,
   },
   resources: {
     Resources: {
@@ -77,11 +79,23 @@ const serverlessConfiguration: AWS = {
           TableName: '${self:provider.environment.SHORTENED_URLS_TABLE}',
           AttributeDefinitions: [
             { AttributeName: 'userId', AttributeType: 'S' },
-            { AttributeName: 'shortenedUrlId', AttributeType: 'S' }
+            { AttributeName: 'shortenedUrlId', AttributeType: 'S' },
+            { AttributeName: 'shortUrl', AttributeType: 'S' }
           ],
           KeySchema: [
             { AttributeName: 'userId', KeyType: 'HASH' },
             { AttributeName: 'shortenedUrlId', KeyType: 'RANGE' },
+          ],
+          GlobalSecondaryIndexes: [
+            {
+              IndexName: '${self:provider.environment.SHORTENED_URLS_TABLE_INDEX_NAME}',
+              KeySchema: [
+                { AttributeName: 'shortUrl', KeyType: 'HASH' },
+              ],
+              Projection: {
+                ProjectionType: 'ALL'
+              }
+            }
           ],
           BillingMode: 'PAY_PER_REQUEST'
         }

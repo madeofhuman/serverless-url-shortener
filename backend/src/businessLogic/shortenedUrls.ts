@@ -25,7 +25,7 @@ export async function createShortenedUrl(
 	const longUrl = validateUrl(parsedBody.url);
 	const userId = parseUserId(jwtToken)
 	const shortenedUrlId = uuid.v4()
-	const shortUrl = `${apiEndpoint}/#${Math.random().toString(32).substring(2, 6) + Math.random().toString(32).substring(2, 6)}`
+	const shortUrl = `${apiEndpoint}/${Math.random().toString(32).substring(2, 6) + Math.random().toString(32).substring(2, 6)}`
 
 	logger.info('userId', userId)
 	logger.info('shortenedUrlId', shortenedUrlId)
@@ -49,7 +49,9 @@ export async function createShortenedUrl(
  * @param jwtToken 
  * @returns 
  */
-export async function getShortenedUrls(jwtToken: string): Promise<ShortenedUrlItem[]> {
+export async function getShortenedUrls(
+	jwtToken: string
+): Promise<ShortenedUrlItem[]> {
 	const userId = parseUserId(jwtToken)
 
 	return shortenedUrlAccess.getShortenedUrls(userId)
@@ -61,7 +63,10 @@ export async function getShortenedUrls(jwtToken: string): Promise<ShortenedUrlIt
  * @param shortenedUrlId 
  * @returns 
  */
-export async function deleteShortenedUrl(jwtToken: string, shortenedUrlId: string) {
+export async function deleteShortenedUrl(
+	jwtToken: string,
+	shortenedUrlId: string
+) {
 	const userId = parseUserId(jwtToken)
 	const toReturn = shortenedUrlAccess.deleteShortenedUrl(userId, shortenedUrlId)
 
@@ -74,9 +79,24 @@ export async function deleteShortenedUrl(jwtToken: string, shortenedUrlId: strin
  * @param shortenedUrlId 
  * @returns 
  */
- export async function getShortenedUrl(jwtToken: string, shortenedUrlId: string) {
+ export async function getShortenedUrl(
+	 jwtToken: string,
+	 shortenedUrlId: string
+) {
 	const userId = parseUserId(jwtToken)
 	const toReturn = shortenedUrlAccess.getShortenedUrl(userId, shortenedUrlId)
+
+	return toReturn
+}
+
+/**
+ * 
+ * @param shortUrlHash 
+ * @returns 
+ */
+ export async function getLongUrl(shortUrlHash: string) {
+	const shortUrl = `${apiEndpoint}/${shortUrlHash}`
+	const toReturn = shortenedUrlAccess.getLongUrl(shortUrl)
 
 	return toReturn
 }

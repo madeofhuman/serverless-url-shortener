@@ -11,6 +11,7 @@ export class ShortenedUrlAccess {
 	constructor(
 		private readonly docClient: DocumentClient = createDynamoDBClient(),
 		private readonly shortenedUrlsTable = process.env.SHORTENED_URLS_TABLE,
+		private readonly indexName = process.env.SHORTENED_URLS_TABLE_INDEX_NAME,
 	) {}
 
   /**
@@ -112,6 +113,37 @@ export class ShortenedUrlAccess {
 
 		logger.info('Query result:', queryResult)
 		result.body = JSON.stringify(queryResult.Items[0])
+
+		return result;
+	}
+
+	async getLongUrl(shortUrl: string) {
+		let result = {
+			statusCode: 301,
+			body: '',
+			headers: {}
+		}
+
+		const queryResult = await this.docClient
+			.query({
+				TableName: this.shortenedUrlsTable,
+				IndexName: this.indexName,
+				KeyConditionExpression: 'shortUrl = :shortUrl',
+				ExpressionAttributeValues: {
+					':shortUrl': shortUrl
+				},
+				ScanIndexForward: false
+			})
+			.promise()
+
+		if (queryResult.Items.length === 0) {
+			result.statusCode = 404
+			result.body = JSON.stringify({ 'error': 'No such short url found' })
+			return result
+		}
+
+		logger.info('Query result:', queryResult)
+		result.headers = { Location: queryResult.Items[0].longUrl }
 
 		return result;
 	}
