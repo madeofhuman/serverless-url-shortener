@@ -2,6 +2,7 @@ import type { AWS } from '@serverless/typescript';
 
 import Auth from '@functions/auth';
 import createShortenedUrl from '@functions/http/createShortenedUrl';
+import getShortenedUrls from '@functions/http/getShortenedUrls';
 
 const serverlessConfiguration: AWS = {
   service: 'serverless-url-shortener',
@@ -61,7 +62,8 @@ const serverlessConfiguration: AWS = {
   },
   functions: {
     Auth,
-    createShortenedUrl
+    createShortenedUrl,
+    getShortenedUrls,
   },
   resources: {
     Resources: {

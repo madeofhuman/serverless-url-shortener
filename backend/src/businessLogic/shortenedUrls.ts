@@ -46,6 +46,17 @@ export async function createShortenedUrl(
 
 /**
  * 
+ * @param jwtToken 
+ * @returns 
+ */
+export async function getShortenedUrls(jwtToken: string): Promise<ShortenedUrlItem[]> {
+	const userId = parseUserId(jwtToken)
+
+	return shortenedUrlAccess.getShortenedUrls(userId)
+}
+
+/**
+ * 
  * @param url The URL to validate
  * @returns the valid URL
  * @throws error when url is invalid

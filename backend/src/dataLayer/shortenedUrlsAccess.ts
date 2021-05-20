@@ -28,6 +28,28 @@ export class ShortenedUrlAccess {
 
 		return shortenedUrl
 	}
+
+	/**
+	 * 
+	 * @param userId 
+	 * @returns 
+	 */
+	async getShortenedUrls(userId: string): Promise<ShortenedUrlItem[]> {
+		const result = await this.docClient
+			.query({
+				TableName: this.shortenedUrlsTable,
+				KeyConditionExpression: 'userId = :userId',
+				ExpressionAttributeValues: {
+					':userId': userId
+				}
+			})
+			.promise()
+
+		logger.info('Query result:', result)
+
+		const items = result.Items
+		return items as ShortenedUrlItem[]
+	}
 }
 
 function createDynamoDBClient(): AWS.DynamoDB.DocumentClient {
