@@ -86,6 +86,35 @@ export class ShortenedUrlAccess {
 
 		return result
 	}
+
+	async getShortenedUrl(userId: string, shortenedUrlId: string) {
+		let result = {
+			statusCode: 200,
+			body: ''
+		}
+
+		const queryResult = await this.docClient
+			.query({
+				TableName: this.shortenedUrlsTable,
+				KeyConditionExpression: 'userId = :userId AND shortenedUrlId = :shortenedUrlId',
+				ExpressionAttributeValues: {
+					':userId': userId,
+					':shortenedUrlId': shortenedUrlId
+				}
+			})
+			.promise()
+
+		if (queryResult.Items.length === 0) {
+			result.statusCode = 404
+			result.body = JSON.stringify({ 'error': 'No shortened url with given id found' })
+			return result
+		}
+
+		logger.info('Query result:', queryResult)
+		result.body = JSON.stringify(queryResult.Items[0])
+
+		return result;
+	}
 }
 
 function createDynamoDBClient(): AWS.DynamoDB.DocumentClient {

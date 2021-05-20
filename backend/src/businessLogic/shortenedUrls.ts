@@ -58,12 +58,25 @@ export async function getShortenedUrls(jwtToken: string): Promise<ShortenedUrlIt
 /**
  * 
  * @param jwtToken 
- * @param todoId 
+ * @param shortenedUrlId 
  * @returns 
  */
 export async function deleteShortenedUrl(jwtToken: string, shortenedUrlId: string) {
 	const userId = parseUserId(jwtToken)
 	const toReturn = shortenedUrlAccess.deleteShortenedUrl(userId, shortenedUrlId)
+
+	return toReturn
+}
+
+/**
+ * 
+ * @param jwtToken 
+ * @param shortenedUrlId 
+ * @returns 
+ */
+ export async function getShortenedUrl(jwtToken: string, shortenedUrlId: string) {
+	const userId = parseUserId(jwtToken)
+	const toReturn = shortenedUrlAccess.getShortenedUrl(userId, shortenedUrlId)
 
 	return toReturn
 }
