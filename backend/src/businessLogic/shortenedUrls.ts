@@ -22,7 +22,7 @@ export async function createShortenedUrl(
 	jwtToken: string,
 	parsedBody: CreateShortenedUrlRequest
 ) {
-	const longUrl = validateUrl(parsedBody.url);
+	const longUrl = validateUrl(parsedBody.longUrl);
 	const userId = parseUserId(jwtToken)
 	const shortenedUrlId = uuid.v4()
 	const shortUrl = `${apiEndpoint}/${Math.random().toString(32).substring(2, 6) + Math.random().toString(32).substring(2, 6)}`

@@ -1,3 +1,3 @@
 export interface CreateShortenedUrlRequest {
-	url: string
+	longUrl: string
 }

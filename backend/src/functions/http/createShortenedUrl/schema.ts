@@ -2,8 +2,8 @@ export default {
   title: "create",
   type: "object",
   properties: {
-    url: { type: 'string' },
+    longUrl: { type: 'string' },
   },
-  required: ['longUrl', 'shortUrl'],
+  required: ['longUrl'],
   additionalProperties: false
 } as const;
