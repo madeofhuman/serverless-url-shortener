@@ -19,6 +19,16 @@ export default {
       ],
       Resource: [
         {"Fn::GetAtt": [ 'ShortenedUrlsDynamoDBTable', 'Arn' ]},
+        {
+          "Fn::Join": [
+            "/",
+            [
+              {"Fn::GetAtt": [ 'ShortenedUrlsDynamoDBTable', 'Arn' ]},
+              "index",
+              "longUrlIndex",
+            ],
+          ]
+        },
       ],
     },
   ]
