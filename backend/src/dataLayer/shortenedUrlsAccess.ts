@@ -50,6 +50,42 @@ export class ShortenedUrlAccess {
 		const items = result.Items
 		return items as ShortenedUrlItem[]
 	}
+
+	async deleteShortenedUrl(userId: string, shortenedUrlId: string) {
+		let result = {
+			statusCode: 200,
+			body: ''
+		}
+
+		let shortenedUrlToBeDeleted = await this.docClient
+			.query({
+				TableName: this.shortenedUrlsTable,
+				KeyConditionExpression: 'userId = :userId AND shortenedUrlId = :shortenedUrlId',
+				ExpressionAttributeValues: {
+					':userId': userId,
+					':shortenedUrlId': shortenedUrlId
+				}
+			})
+			.promise()
+
+		if (shortenedUrlToBeDeleted.Items.length === 0) {
+			result.statusCode = 404
+			result.body = 'No shortened url item to be deleted'
+			return result
+		}
+
+		await this.docClient
+			.delete({
+				TableName: this.shortenedUrlsTable,
+				Key: {
+					userId,
+					shortenedUrlId
+				}
+			})
+			.promise()
+
+		return result
+	}
 }
 
 function createDynamoDBClient(): AWS.DynamoDB.DocumentClient {
