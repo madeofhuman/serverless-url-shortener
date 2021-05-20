@@ -1,0 +1,305 @@
+{
+	"info": {
+		"_postman_id": "9532056f-be0c-4292-8881-ce871809f7cc",
+		"name": "Serverless URL Shortener",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Shortened URL",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"longUrl\": \"https://bing.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{api_Id}}.execute-api.eu-west-2.amazonaws.com/dev/shorten",
+					"protocol": "https",
+					"host": [
+						"{{api_Id}}",
+						"execute-api",
+						"eu-west-2",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"shorten"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Shortened URL With Invalid URL",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"url\": \"https://google.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{api_Id}}.execute-api.eu-west-2.amazonaws.com/dev/shorten",
+					"protocol": "https",
+					"host": [
+						"{{api_Id}}",
+						"execute-api",
+						"eu-west-2",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"shorten"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Shortened URL With Invalid Request Format",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"longUrl\": \"https://bing.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{api_Id}}.execute-api.eu-west-2.amazonaws.com/dev/shorten",
+					"protocol": "https",
+					"host": [
+						"{{api_Id}}",
+						"execute-api",
+						"eu-west-2",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"shorten"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Shortened URLs",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api_Id}}.execute-api.eu-west-2.amazonaws.com/dev/shortenedUrls",
+					"protocol": "https",
+					"host": [
+						"{{api_Id}}",
+						"execute-api",
+						"eu-west-2",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"shortenedUrls"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Shortened URL",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api_Id}}.execute-api.eu-west-2.amazonaws.com/dev/shortenedUrls/e6dc29fb-a450-4da4-85ef-4ee1ddf19a15",
+					"protocol": "https",
+					"host": [
+						"{{api_Id}}",
+						"execute-api",
+						"eu-west-2",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"shortenedUrls",
+						"e6dc29fb-a450-4da4-85ef-4ee1ddf19a15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Shortened URL With Invalid ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api_Id}}.execute-api.eu-west-2.amazonaws.com/dev/shortenedUrls/e6dc29fb-a450-4da4-85ef-4ee1ddf19a15sd",
+					"protocol": "https",
+					"host": [
+						"{{api_Id}}",
+						"execute-api",
+						"eu-west-2",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"shortenedUrls",
+						"e6dc29fb-a450-4da4-85ef-4ee1ddf19a15sd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Shortened URL",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{api_Id}}.execute-api.eu-west-2.amazonaws.com/dev/shortenedUrls/e6dc29fb-a450-4da4-85ef-4ee1ddf19a15",
+					"protocol": "https",
+					"host": [
+						"{{api_Id}}",
+						"execute-api",
+						"eu-west-2",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"shortenedUrls",
+						"e6dc29fb-a450-4da4-85ef-4ee1ddf19a15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Redirect To Long URL From Short URL",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{api_Id}}.execute-api.eu-west-2.amazonaws.com/dev/chdng1bg",
+					"protocol": "https",
+					"host": [
+						"{{api_Id}}",
+						"execute-api",
+						"eu-west-2",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"chdng1bg"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Im1VbUZ0MjRQVjYwSlFaMElJZGI2MyJ9.eyJpc3MiOiJodHRwczovL21hZGVvZmh1bWFuLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2MGE2NDI0MGNiZTZjMTAwNmI2ZmMyZTciLCJhdWQiOiJOaWNzZVlUcDFkS09YM01yT3V0Q2F2SmdnSVRQUTRyOCIsImlhdCI6MTYyMTUwODY3OCwiZXhwIjoxNjIxODY4Njc4LCJhdF9oYXNoIjoiQUp0d0FMMllDX3RSeTNIVU1XZ1hqUSIsIm5vbmNlIjoiUzUuclpQYnN0aVBKRy56TE1IcnNRc2dKS3VWa3gteEQifQ.fCgCJuTlaiaUWnwGjesIXzjTmzIk7sv2IIIPIxDl2t7Hy8rjVGt26UgUQz6bxMmc0r1PTEnUaFQdH7aa2XRxFwjOtqX1oLX8oHEKUAnw_XRrHTxIVD_u6K_9uKm5cXmV6U-Hbx_bpQHLjB7yNRIylP_eOQv18uhC8vdXzRt11nPnTw22nfAwkNgVUGrwgoSP0T5jnMTwnA5DgdyCi9ANVIzpQmN1ZNhpwtI7Zh03vWfiMwXtNhHIUfV1L3WAfzEQfpdGH9_SqznW96wPlCOkrG2CYgMmGJorBuIP-dRCt2l1U8hOw-qOmkQJPXeLvdDjqH_dpDL203RjmVo81Gi5AQ",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "19592010-d55c-4aa9-9f95-d2bc950bc721",
+			"key": "api_Id",
+			"value": "xgc8h3gbw0"
+		}
+	]
+}
